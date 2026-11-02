@@ -1,7 +1,7 @@
-<H3>ENTER YOUR NAME</H3>
-<H3>ENTER YOUR REGISTER NO.</H3>
-<H3>EX. NO.1</H3>
-<H3>DATE</H3>
+<H3>NAME:KANIGAVEL M <H3>
+<H3>REG.NO:212224240070<H3>
+<H3>EX.NO:1<H3>
+<H3>DATE:02/11/2026<H3>
 <H1 ALIGN =CENTER> Introduction to Kaggle and Data preprocessing</H1>
 
 ## AIM:
@@ -37,11 +37,64 @@ STEP 5:Normalizing the data<BR>
 STEP 6:Splitting the data into test and train<BR>
 
 ##  PROGRAM:
-TYPE YOUR CODE HERE
+~~~
+from google.colab import files
+import pandas as pd
+import io
+from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+
+df=pd.read_csv(r"/content/Churn_Modelling.csv")
+print(df)
+
+x=df.iloc[:,:-1].values
+print(x)
+
+y=df.iloc[:,-1].values
+print(y)
+
+print(df.isnull().sum())
+
+df.fillna(df.mean(numeric_only=True).round(1), inplace=True)
+print(df.isnull().sum())
+y=df.iloc[:,-1].values
+print(y)
+
+df.duplicated()
+
+print(df['EstimatedSalary'].describe())
+
+# Select only numeric columns for scaling
+numeric_cols = df.select_dtypes(include=['number']).columns
+df_numeric = df[numeric_cols]
+
+scaler=MinMaxScaler()
+df1=pd.DataFrame(scaler.fit_transform(df_numeric))
+print(df1)
+X_train,X_test,y_train,y_test=train_test_split(x,y,test_size=0.2)
+
+print(X_train)
+print(len(X_train))
+print(X_test)
+print(len(X_test))
+~~~
+
 
 
 ## OUTPUT:
-SHOW YOUR OUTPUT HERE
+<img width="1103" height="607" alt="image" src="https://github.com/user-attachments/assets/ba1fbd00-8ec8-48eb-8054-8ac9073be7b8" />
+<img width="1106" height="650" alt="image" src="https://github.com/user-attachments/assets/db166db4-701e-4d19-9917-ebb99b4badcd" />
+<img width="1111" height="578" alt="image" src="https://github.com/user-attachments/assets/389a51de-8fea-48bd-b555-7bedb1e12dfb" />
+
+<img width="852" height="494" alt="image" src="https://github.com/user-attachments/assets/ac09f29e-44ed-4c88-b45e-1985467d3714" />
+
+
+
+
+
+
+
 
 
 ## RESULT:
